@@ -1,98 +1,100 @@
-  import { ClienteService } from './../../services/clientes.service';
-  import { ICliente } from './../../interfaces/clientes';
-  import { Component } from '@angular/core';
-  import { FormControl, FormGroup, Validators } from '@angular/forms';
-  import { Router, ActivatedRoute } from '@angular/router';
-  import Swal from 'sweetalert2';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ICliente } from '../../interfaces/clientes';
+import { ClienteService } from '../../services/clientes.service';
+import Swal from 'sweetalert2';
 
-  @Component({
-    selector: 'app-cadastrar-atualizar-clientes',
-    templateUrl: './cadastrar-atualizar-clientes.component.html',
-    styleUrls: ['./cadastrar-atualizar-clientes.component.css']
-  })
-  export class CadastrarAtualizarClientesComponent {
+@Component({
+  selector: 'app-cadastrar-atualizar-cliente',
+  templateUrl: './cadastrar-atualizar-clientes.component.html',
+  styleUrls: ['./cadastrar-atualizar-clientes.component.css']
+})
 
-    clienteForm = new FormGroup({
-      nome: new FormControl('', Validators.required),
-      cpf: new FormControl('', Validators.required),
-      telefone: new FormControl('', Validators.required),
-      rua: new FormControl('', Validators.required),
-      numero: new FormControl(0, Validators.required),
-      cep: new FormControl('', Validators.required),
-      rendimentoMensal: new FormControl(0, Validators.required)
-    });
+export class CadastrarAtualizarClientesComponent implements OnInit {
 
-    cpfCliente = '';
+  clienteForm = new FormGroup({
+    cpf: new FormControl('', Validators.required),
+    nome: new FormControl('', Validators.required),
+    telefone: new FormControl('', Validators.required),
+    rua: new FormControl('', Validators.required),
+    numero: new FormControl(0, Validators.required),
+    cep: new FormControl('', Validators.required),
+    rendimentoMensal: new FormControl(0, Validators.required)
+  });
 
-    constructor(private clienteService: ClienteService, private route: ActivatedRoute, private router: Router) {}
+  cpfCliente = '';
 
-    ngOnInit(){
-      this.cpfCliente = String(this.route.snapshot.paramMap.get('id'));
+  constructor(private clienteService: ClienteService, private route: ActivatedRoute, private router: Router) {}
 
-      // if(this.cpfCliente !== null){
-      //   this.editar();
-      // } else {
-      //   this.cadastrar();
-      // }
+  ngOnInit() {
+    this.cpfCliente = String(this.route.snapshot.paramMap.get('id'));
 
-      if((this.cpfCliente !== null)){
-        this.clienteService.buscarClienteCpf(this.cpfCliente).subscribe((cliente: ICliente) => {
+    if((this.cpfCliente !== 'null')) {
+      this.clienteService.buscarClienteCpf(this.cpfCliente).subscribe((cliente: ICliente) => {
           this.clienteForm.setValue({
-            nome: cliente.nome,
-            cpf: cliente.cpf,
-            telefone: cliente.telefone,
-            rua: cliente.rua,
-            numero: cliente.numero || null,
-            cep: cliente.cep,
-            rendimentoMensal: cliente.rendimentoMensal || null
-
-          })
-        })
-      }
+              cpf: cliente.cpf,
+              nome: cliente.nome,
+              telefone: cliente.telefone || null,
+              rua: cliente.rua,
+              numero: cliente.numero || 0,
+              cep: cliente.cep,
+              rendimentoMensal: cliente.rendimentoMensal || 0,
+          });
+      });
     }
 
-    cadastrar() {
-      const cliente: ICliente = this.clienteForm.value as ICliente;
-      this.clienteService.cadastrarCliente(cliente).subscribe(result => {
-          Swal.fire(
-            'Tudo certo!',
-            'Cadastro realizado com sucesso!',
-            'success'
-          );
-          this.clienteForm.setValue({
-            cpf: '',
-            nome: '',
-            telefone: null,
-            rua: '',
-            numero: 0,
-            cep: '',
-            rendimentoMensal: 0
-          })
-      }, error => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Algo deu errado! Verifique o erro no console (Ou no Back End).'
-          })
-          console.error(error);
-      })
-    }
+  }
 
-    editar() {
-      const cliente: ICliente = this.clienteForm.value as ICliente;
-      this.clienteService.editarCliente(this.cpfCliente.toString(), cliente).subscribe(result => {
+  cadastrarOuEditar(): void {
+    if(this.cpfCliente !== 'null') {
+      this.editar();
+    } else {
+      this.cadastrar();
+    }
+  }
+
+  cadastrar(): void {
+    const cliente: ICliente = this.clienteForm.value as ICliente;
+    this.clienteService.cadastrarCliente(cliente).subscribe(result => {
         Swal.fire(
-          'Edição relaizada com sucesso!',
+          'Cadastro realizado com sucesso!',
+          'success'
+        );
+        this.clienteForm.setValue({
+          cpf: '',
+          nome: '',
+          telefone: null,
+          rua: '',
+          numero: 0,
+          cep: '',
+          rendimentoMensal: 0
+        });
+    }, error => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Algo deu errado! Verifique se preencheu os campos corretamente.'
+        });
+        console.error(error);
+    });
+  }
+
+  editar(): void {
+    const cliente: ICliente = this.clienteForm.value as ICliente;
+    this.clienteService.editarCliente(this.cpfCliente.toString(), cliente).subscribe(result => {
+        Swal.fire(
+          'Edição realizada com sucesso!',
           'success'
         );
         this.router.navigate(['/clientes']);
-      }, error => {
+    }, error => {
         Swal.fire({
           icon: 'error',
-          text: 'Erro ao editar!'
-        })
-
+          title: 'Oops...',
+          text: 'Algo deu errado! Verifica se preencheu todos os campos.'
+        });
         console.error(error);
-      })
-    }
+    });
   }
+}

@@ -12,22 +12,15 @@ const routes: Routes = [
     path: 'home', component: HomeComponent
   },
   {
-    path: 'clientes', component: ClientesComponent
+    path: 'clientes/lista', component: ClientesComponent
   },
-  // {
-  //   path: 'clientes/:id, component: ClientesComponent'
-  // },
-  //(POST)
   {
     path: 'clientes/cadastrar', component: CadastrarAtualizarClientesComponent
   },
-
-  //PUT
   {
     path: 'clientes/editar/:id', component: CadastrarAtualizarClientesComponent
   },
 
-  //DELETE
   { path: 'clientes/delete/:id', component: DeletarClienteComponent },
 ];
 

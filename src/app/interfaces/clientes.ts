@@ -4,8 +4,8 @@ export interface ICliente{
   cpf: string;
   telefone: string;
   rua: string;
-  numero?: number;
+  numero: number;
   cep: string;
-  rendimentoMensal?: number;
-
+  rendimentoMensal: number;
 }
+

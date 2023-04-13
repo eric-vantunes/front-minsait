@@ -1,9 +1,9 @@
-<h1 class="display-6 pt-3 text-center">Clientes</h1>
+<h1 class="display-6 pt-5 text-center">Clientes</h1>
 <hr class="pb-3">
-<div class="container">
+<div class="container-fluid">
   <a class="btn btn-dark tn-sm" routerLink="/clientes/cadastrar"><i class="bi bi-plus-lg"></i></a>
 
-  <table class="table table-bordered table-striped my-3">
+  <table class="table table-bordered my-3">
     <thead>
       <tr>
         <th scope="col">CPF</th>
@@ -13,7 +13,7 @@
         <th scope="col">Numero</th>
         <th scope="col">Cep</th>
         <th scope="col">Rendimento Mensal</th>
-        <th scope="col">Status</th>
+        <th scope="col">Ações</th>
       </tr>
     </thead>
     <tbody>
@@ -24,11 +24,11 @@
         <td>{{ cliente.rua }}</td>
         <td>{{ cliente.numero }}</td>
         <td>{{ cliente.cep }}</td>
-        <td>{{ cliente.rendimentoMensal }}</td>
+        <td>{{ cliente.rendimentoMensal | currency: "BRL"}}</td>
         <td>
           <button type="button" class="btn btn-warning btn-sm" title="Editar"
             routerLink="/clientes/editar/{{cliente.cpf}}"><i class="fa-solid fa-pen-to-square"></i>Editar</button>
-          <button type="button" class="btn btn-danger btn-sm ms-1" title="Excluir"
+          <button type="button" class="btn btn-danger btn-sm ms-1" title="Deletar"
             routerLink="/clientes/delete/{{ cliente.cpf }}"><i class="fa-solid fa-trash-can"></i>Deletar</button>
         </td>
       </tr>

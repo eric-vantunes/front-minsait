@@ -2,52 +2,52 @@
 <hr />
 
 <div class="container-fluid">
-  <form [formGroup]="clienteForm" (ngSubmit)="cadastrar()">
+  <form [formGroup]="clienteForm" (ngSubmit)="cadastrarOuEditar()">
     <div class="row">
       <div class="col-12">
         <div class="mb-3">
-          <label for="titulo" class="form-label">CPF</label>
-          <input type="text" [readonly]="cpfCliente !== 'null' ? true : false" class="form-control" id="cpf" formControlName="cpf"/>
+          <label for="cpf" class="form-label">CPF</label>
+          <input type="text" [readonly]="cpfCliente !== 'null' ? true : false" class="form-control" id="cpf" required formControlName="cpf" max="11" min="0" placeholder="CPF"/>
         </div>
       </div>
       <div class="col-3">
         <div class="mb-3">
-          <label for="valorUnitario" class="form-label">Nome</label>
-          <input id="valorUnitario" type="number" class="form-control" formControlName="valorUnitario" max="10" min="0" />
+          <label for="nome" class="form-label">Nome</label>
+          <input id="text" type="text" class="form-control" formControlName="nome" required max="10" min="0" />
         </div>
       </div>
       <div class="col-3">
         <div class="mb-3">
-          <label for="quantidade" class="form-label">Telefone</label>
-          <input id="quantidade" type="number" class="form-control" formControlName="quantidade" max="10" min="0" />
+          <label for="telefone" class="form-label">Telefone</label>
+          <input id="telefone" type="number" class="form-control" formControlName="telefone" max="10" min="0" />
         </div>
       </div>
       <div class="col-3">
         <div class="mb-3">
-          <label for="ano" class="form-label">Rendimento Mensal</label>
-          <input id="ano" type="text" class="form-control" formControlName="ano" />
+          <label for="rendimentoMensal" class="form-label">Rendimento Mensal</label>
+          <input id="rendimentoMensal" type="number" class="form-control" formControlName="rendimentoMensal" mask="separator.0 "/>
         </div>
       </div>
       <div class="col-3">
         <div class="mb-3">
-          <label for="status" class="form-label">Rua</label>
-          <input id="status" type="text" class="form-control" formControlName="status" />
+          <label for="rua" class="form-label">Rua</label>
+          <input id="status" type="text" class="form-control" formControlName="rua" />
         </div>
       </div>
       <div class="col-3">
         <div class="mb-3">
-          <label for="status" class="form-label">Numero</label>
-          <input id="status" type="text" class="form-control" formControlName="status" />
+          <label for="numero" class="form-label">Numero</label>
+          <input id="status" type="number" class="form-control" formControlName="numero" />
         </div>
       </div>
       <div class="col-3">
         <div class="mb-3">
-          <label for="status" class="form-label">CEP</label>
-          <input id="status" type="text" class="form-control" formControlName="status" />
+          <label for="cep" class="form-label">CEP</label>
+          <input id="status" type="text" class="form-control" formControlName="cep" placeholder="13483000"/>
         </div>
       </div>
     </div>
-    <button type="button" routerLink="/clientes" class="btn btn-dark">Voltar</button>
-    <button type="submit" [disabled]="clienteForm.invalid" class="btn btn-dark">Salvar</button>
+    <button type="button" routerLink="/clientes/lista" class="btn btn-dark">Voltar</button>
+    <button type="submit" class="btn btn-dark m-2">Salvar</button>
   </form>
 </div>
