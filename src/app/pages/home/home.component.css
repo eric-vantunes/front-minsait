@@ -1,0 +1,13 @@
+.home h1{
+  font-weight: bold;
+  font-size: 48px !important;
+}
+
+.home p{
+  font-size: 24px;
+}
+
+.home i{
+  margin-left: 5px;
+  font-size: 28px;
+}
