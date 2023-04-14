@@ -33,7 +33,6 @@ export class DeletarClienteComponent {
     }).then((result) => {
       if(result.isConfirmed) {
         this.cpfCliente = String(this.route.snapshot.paramMap.get('id'));
-
         this.ClienteService.deletaCliente(this.cpfCliente).subscribe(result => {
           Swal.fire(
             'Seu cadastro foi excluído com sucesso!',
@@ -49,9 +48,11 @@ export class DeletarClienteComponent {
           })
           console.error(error);
         })
+        setTimeout(function() {
+          window.location.reload()
+        })
       }
-
-      this.router.navigate(['/clientes']);
+      this.router.navigate(['/clientes/lista']);
     });
   }
 

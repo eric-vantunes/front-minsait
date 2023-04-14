@@ -39,7 +39,7 @@ export class CadastrarAtualizarClientesComponent implements OnInit {
               rua: cliente.rua,
               numero: cliente.numero || 0,
               cep: cliente.cep,
-              rendimentoMensal: cliente.rendimentoMensal || 0,
+              rendimentoMensal: cliente.rendimentoMensal,
           });
       });
     }

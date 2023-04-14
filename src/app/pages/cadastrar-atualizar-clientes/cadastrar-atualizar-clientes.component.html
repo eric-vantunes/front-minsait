@@ -24,12 +24,6 @@
       </div>
       <div class="col-3">
         <div class="mb-3">
-          <label for="rendimentoMensal" class="form-label">Rendimento Mensal</label>
-          <input id="rendimentoMensal" type="number" class="form-control" formControlName="rendimentoMensal" mask="separator.0 "/>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="mb-3">
           <label for="rua" class="form-label">Rua</label>
           <input id="status" type="text" class="form-control" formControlName="rua" />
         </div>
@@ -46,8 +40,16 @@
           <input id="status" type="text" class="form-control" formControlName="cep" placeholder="13483000"/>
         </div>
       </div>
+      <div class="col-3">
+        <div class="mb-3">
+          <label for="rendimentoMensal" class="form-label">Rendimento Mensal</label>
+          <input type="text" class="form-control" formControlName="rendimentoMensal"/>
+        </div>
+      </div>
     </div>
     <button type="button" routerLink="/clientes/lista" class="btn btn-dark">Voltar</button>
     <button type="submit" class="btn btn-dark m-2">Salvar</button>
   </form>
 </div>
+
+

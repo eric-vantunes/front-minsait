@@ -24,7 +24,7 @@
         <td>{{ cliente.rua }}</td>
         <td>{{ cliente.numero }}</td>
         <td>{{ cliente.cep }}</td>
-        <td>{{ cliente.rendimentoMensal | currency: "BRL"}}</td>
+        <td>{{ cliente.rendimentoMensal}}</td>
         <td>
           <button type="button" class="btn btn-warning btn-sm" title="Editar"
             routerLink="/clientes/editar/{{cliente.cpf}}"><i class="fa-solid fa-pen-to-square"></i>Editar</button>
